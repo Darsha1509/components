@@ -1,0 +1,15 @@
+.large-button {
+    height: 48px;
+    width: 343px;
+
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-left: 10px;
+
+    background-color: transparent;
+    color: inherit;
+
+    font: inherit;
+}
