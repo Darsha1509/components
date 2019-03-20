@@ -1,0 +1,56 @@
+.Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+  border: 2px solid #6979f8;
+  border-radius: 6px;
+  margin-top: 10px;
+  margin-left: 10px;
+
+  background-color: #6979f8;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 17px;
+  line-height: 22px;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: #ffffff;
+}
+
+.Button_customType_ghost {
+  background-color: transparent;
+  color: #6979f8;
+}
+
+.Button_size_large {
+  height: 48px;
+  min-width: 343px;
+}
+
+.Button_size_small {
+  height: 40px;
+  min-width: 180px;
+
+  font-size: 13px;
+  line-height: 18px;
+  text-transform: capitalize;
+}
+
+.Button_size_otherSquare {
+  height: 48px;
+  width: 48px;
+
+  border-radius: 16px;
+}
+
+.Button-Icon {
+  padding-right: 9px;
+}
+
+.Button-icon_size_otherSquare {
+  width: 150px;
+  height: 200px;
+}
