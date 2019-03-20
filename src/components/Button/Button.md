@@ -29,6 +29,7 @@ const plusIcon = (
   <Button size="large" icon={plusIcon}>
     Left icon
   </Button>
+  <Button>MyButton</Button>
 </div>
 ```
 

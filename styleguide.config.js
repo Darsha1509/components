@@ -6,5 +6,6 @@ module.exports = {
       publicPath: process.env.PUBLIC_URL || ''
     };
     return webpackConfig;
-  }
+  },
+  components: 'src/components/**/[A-Z]*.js'
 };
