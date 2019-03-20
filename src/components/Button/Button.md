@@ -1,17 +1,3 @@
-## Large buttons:
-### Default
-
-```js
-<Button size="large">Default</Button>
-```
-
-### Ghost
-
-```js
-<Button size="large" customType="ghost">Ghost</Button>
-```
-
-### Left icon
 ```js
 const plusIcon = (
   <svg
@@ -26,17 +12,23 @@ const plusIcon = (
       fill="currentColor"
     />
   </svg>
-);
+  );
+<div>
+  <div style={{ display: "flex" }}>
+    <Button size="large">Default</Button>
+    <Button size="small">Small default</Button>
+  </div>
+  <div style={{ display: "flex" }}>
+    <Button size="large" customType="ghost">
+      Ghost
+    </Button>
+    <Button size="small" customType="ghost">
+      Small ghost
+    </Button>
+  </div>  
+  <Button size="large" icon={plusIcon}>
+    Left icon
+  </Button>
+</div>
+```
 
-<Button size="large" icon={plusIcon}>Left icon</Button>
-```
-## Small buttons:
-### Default
-```js
-<Button size="small">Small default</Button>
-```
-
-### Ghost
-```js
-<Button size="small" customType="ghost">Small ghost</Button>
-```
