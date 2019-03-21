@@ -1,0 +1,25 @@
+.LeftIconInput {
+    position: relative;
+
+    color: #D0C9D6;
+}
+
+.LeftIconInput:focus-within {
+    color: #000000;
+}
+
+.LeftIconInput-Icon {
+    position: absolute;
+    top: 1.1rem;
+    left: 2rem;
+}
+
+.LeftIconInput-Icon {
+    position: absolute;
+    top: 1.1rem;
+    left: 2rem;
+}
+
+.LeftIconInput-Input {
+    padding-left: 2.3rem;
+}
