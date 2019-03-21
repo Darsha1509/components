@@ -5,15 +5,9 @@ import "./Input.css";
 
 export default class Input extends Component {
   render() {
-
     const { className, ...otherProps } = this.props;
 
-    return (
-      <input
-        className="Input"
-        {...otherProps}
-      />
-    );
+    return <input className={`Input ${className}`} {...otherProps} />;
   }
 }
 

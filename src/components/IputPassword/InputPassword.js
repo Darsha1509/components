@@ -22,7 +22,7 @@ export default class InputPassword extends Component {
   }
 
   render() {
-    const { className, type, ...otherProps } = this.props;
+    const { ...otherProps } = this.props;
 
     const { inputType } = this.state;
 
