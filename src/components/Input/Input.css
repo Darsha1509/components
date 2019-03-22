@@ -1,9 +1,17 @@
 .Input {
+    position: relative;
+    color: #D0C9D6;
+}
+
+.Input:focus-within {
+    color: #000000;
+}
+
+.Input-Form {
   margin: 0 0 0 1rem;
 
   min-width: 15rem;
   height: 3rem;
-  padding-left: 1rem;
 
   border: 0.06em solid transparent;
   border-radius: 0.38rem;
@@ -17,40 +25,54 @@
   outline: none;
 }
 
-.Input::-webkit-input-placeholder{
+.Input-Form::-webkit-input-placeholder{
   color: #d0c9d6;
 }
 
-.Input::-moz-placeholder{
+.Input-Form::-moz-placeholder{
     color: #d0c9d6;
 }
 
-.Input:-moz-placeholder{
+.Input-Form:-moz-placeholder{
     color: #d0c9d6;
 }
 
-.Input:-ms-input-placeholder{
+.Input-Form:-ms-input-placeholder{
     color: #d0c9d6;
 }
 
-.Input:focus {
+.Input-Form:focus {
     border-color: #ECEBED;
 }
 
-.Input:focus::-webkit-input-placeholder {
+.Input-Form:focus::-webkit-input-placeholder {
     color: transparent
 }
 
-.Input:focus::-moz-placeholder {
+.Input-Form:focus::-moz-placeholder {
     color: transparent
 }
 
-.Input:focus:-moz-placeholder {
+.Input-Form:focus:-moz-placeholder {
     color: transparent
 }
 
-.Input:focus:-ms-input-placeholder {
+.Input-Form:focus:-ms-input-placeholder {
     color: transparent
+}
+
+.Input-Icon {
+    position: absolute;
+    top: 1.2rem;
+    left: 2rem;
+}
+
+.Input-Form_withoutIcon {
+    padding-left: 1rem;
+}
+
+.Input-Form_withIcon {
+    padding-left: 2.2rem;
 }
 
 

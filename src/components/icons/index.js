@@ -1,3 +1,3 @@
-import {plusIcon, location, eye} from "./icons";
+import {plusIcon, location, eye, selectIcon} from "./icons";
 
-export {plusIcon, location, eye};
+export {plusIcon, location, eye, selectIcon};

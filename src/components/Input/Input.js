@@ -5,9 +5,20 @@ import "./Input.css";
 
 export default class Input extends Component {
   render() {
-    const { className, ...otherProps } = this.props;
+    const { icon, ...otherProps } = this.props;
 
-    return <input className={`Input ${className}`} {...otherProps} />;
+    let classValue = "Input-Form_withoutIcon";
+
+    if(icon){
+      classValue = "Input-Form_withIcon";
+    }
+
+    return (
+      <div className="Input" >
+        <div className="Input-Icon">{icon}</div>
+        <input className={`Input-Form ${classValue}`} {...otherProps}/>
+      </div>
+    );
   }
 }
 
