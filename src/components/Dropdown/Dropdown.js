@@ -42,6 +42,8 @@ export default class Dropdown extends Component {
             className="Dropdown-Select Dropdown-Options-Item"
             key={`key_${index}`}
             onClick={() => this.selectItemHandler(item)}
+            role="option"
+            tabIndex={index}
           >
             {item}
           </li>
@@ -50,8 +52,11 @@ export default class Dropdown extends Component {
     }
 
     return (
-      <div className="Dropdown Dropdown_shadow">
-        <div className="Dropdown-SelectImage" onClick={this.showOptionsHandler}>
+      <div
+       className="Dropdown Dropdown_shadow" onClick={this.showOptionsHandler}
+      tabIndex={1}>
+        <div className="Dropdown-SelectImage"
+        aria-haspopup="listbox">
           {selectIcon}
         </div>
         <div className={`Dropdown-Select ${classSelectValue}`}>
@@ -60,6 +65,8 @@ export default class Dropdown extends Component {
         <div className="Dropdown-Icon">{icon}</div>
         <ul
           className={`Dropdown Dropdown-Options Dropdown_shadow Dropdown-Options_${display}`}
+          role="listbox"
+          tabIndex="-1"
         >
           {optionsList}
         </ul>
