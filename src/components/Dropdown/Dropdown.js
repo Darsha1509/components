@@ -31,17 +31,6 @@ export default class Dropdown extends Component {
       }
     };
 
-    this.selectItemHandler = e => {
-      this.setState({ textSelect: e.target.textContent });
-      const variants = document.getElementById("listOfItems");
-      const toChangeElem = variants.getElementsByClassName(
-        "Dropdown-Options-Item_selected"
-      );
-      console.log(toChangeElem);
-      toChangeElem[0].classList.remove("Dropdown-Options-Item_selected");
-      e.target.classList.add("Dropdown-Options-Item_selected");
-    };
-
     this.keyArrowHandler = e => {
       let variants = document.getElementById("listOfItems");
       let innerElems = variants.getElementsByClassName("Dropdown-Select");
@@ -118,7 +107,6 @@ export default class Dropdown extends Component {
             id={`id_${index}`}
             className={classNameValue}
             key={`key_${index}`}
-            onClick={this.selectItemHandler}
           >
             {item}
           </li>

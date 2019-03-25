@@ -15,8 +15,8 @@ export default class InputPassword extends Component {
     this.changeType = () => {
       this.setState(({ inputType }) => {
         return inputType === "password"
-          ? {inputType: "text"}
-          : {inputType: "password"};
+          ? { inputType: "text" }
+          : { inputType: "password" };
       });
     };
   }
@@ -27,8 +27,12 @@ export default class InputPassword extends Component {
     const { inputType } = this.state;
 
     return (
-      <div className="InputPassword"  >
-        <Input type={inputType}  {...otherProps}/>
+      <div className="InputPassword">
+        <Input
+          className="InputPassword-Input"
+          type={inputType}
+          {...otherProps}
+        />
         <div className="InputPassword-Icon" onClick={this.changeType}>
           {eye}
         </div>

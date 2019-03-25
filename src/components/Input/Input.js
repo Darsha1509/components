@@ -5,7 +5,7 @@ import "./Input.css";
 
 export default class Input extends Component {
   render() {
-    const { icon, ...otherProps } = this.props;
+    const { icon, className, ...otherProps } = this.props;
 
     let classValue = "Input-Form_withoutIcon";
 
@@ -16,7 +16,7 @@ export default class Input extends Component {
     return (
       <div className="Input" >
         <div className="Input-Icon">{icon}</div>
-        <input className={`Input-Form ${classValue}`} {...otherProps}/>
+        <input className={`Input-Form ${classValue} || ${className}`} {...otherProps}/>
       </div>
     );
   }
