@@ -32,19 +32,19 @@ export default class Dropdown extends Component {
     };
 
     this.selectItemHandler = e => {
+      console.log(1234);
       this.setState({ textSelect: e.target.textContent });
       const variants = document.getElementById("listOfItems");
       const toChangeElem = variants.getElementsByClassName(
         "Dropdown-Options-Item_selected"
       );
-      console.log(toChangeElem);
       toChangeElem[0].classList.remove("Dropdown-Options-Item_selected");
       e.target.classList.add("Dropdown-Options-Item_selected");
     };
 
     this.keyArrowHandler = e => {
-      let variants = document.getElementById("listOfItems");
-      let innerElems = variants.getElementsByClassName("Dropdown-Select");
+      // const variants = document.getElementById("listOfItems");
+      const innerElems = this._inputUl.getElementsByClassName("Dropdown-Select");
       let selectedIndex = 0;
       const arrFromCollection = Array.from(innerElems);
 
@@ -76,21 +76,20 @@ export default class Dropdown extends Component {
         this.setState({ textSelect: innerElems[selectedIndex].textContent });
       }
 
-     if (e.keyCode === 27) {
-      this.setState(() => {
-       return { display: "hide" };
+      if (e.keyCode === 27) {
+        this.setState(() => {
+          return { display: "hide" };
+        });
+        document.getElementById("selectTab").focus();
+      }
+
+      const NAVIGATION = [38, 40];
+
+      document.body.addEventListener("keydown", e => {
+        if (-1 !== NAVIGATION.indexOf(e.keyCode)) {
+          e.preventDefault();
+        }
       });
-      document.getElementById("selectTab").focus();
-     }
-
-     const NAVIGATION = [38, 40];
-
-     document.body.addEventListener("keydown", (e) => {
-       if(-1 !== NAVIGATION.indexOf(e.keyCode)){
-         e.preventDefault();
-       }
-     });
-
     };
   }
 
@@ -119,6 +118,7 @@ export default class Dropdown extends Component {
             className={classNameValue}
             key={`key_${index}`}
             onClick={this.selectItemHandler}
+            ref={(node) => {this._inputLi = node}}
           >
             {item}
           </li>
@@ -133,7 +133,7 @@ export default class Dropdown extends Component {
       >
         <div className="Dropdown-SelectImage">{selectIcon}</div>
         <div
-         id="selectTab"
+          id="selectTab"
           className={`Dropdown-Select ${classSelectValue}`}
           tabIndex="0"
           onKeyDown={this.keyEnterHandler}
@@ -146,6 +146,9 @@ export default class Dropdown extends Component {
           className={`Dropdown Dropdown-Options Dropdown_shadow Dropdown-Options_${display}`}
           tabIndex="0"
           onKeyDown={this.keyArrowHandler}
+          ref={node => {
+            this._inputUl = node;
+          }}
         >
           {optionsList}
         </ul>
