@@ -20,7 +20,7 @@ const clock = (
   <div>
     <Dropdown data={info} />
   </div>
-  <div style={{marginLeft: "2rem"}}>
+  <div style={{ marginLeft: "2rem" }}>
     <Dropdown data={info} icon={clock} />
   </div>
 </div>;

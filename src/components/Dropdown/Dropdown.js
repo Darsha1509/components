@@ -37,36 +37,60 @@ export default class Dropdown extends Component {
       const toChangeElem = variants.getElementsByClassName(
         "Dropdown-Options-Item_selected"
       );
+      console.log(toChangeElem);
       toChangeElem[0].classList.remove("Dropdown-Options-Item_selected");
       e.target.classList.add("Dropdown-Options-Item_selected");
     };
 
     this.keyArrowHandler = e => {
-      let variants = null;
-      let innerElems = null;
-      let arrFromCollection = null;
-      let selectedIndex = null;
-      if (e.keyCode === 40 || e.keyCode === 38) {
-        variants = document.getElementById("listOfItems");
-        innerElems = variants.getElementsByClassName("Dropdown-Select");
-        console.log(innerElems);
-       arrFromCollection = Array.from(innerElems);
+      let variants = document.getElementById("listOfItems");
+      let innerElems = variants.getElementsByClassName("Dropdown-Select");
+      let selectedIndex = 0;
+      const arrFromCollection = Array.from(innerElems);
 
-       arrFromCollection.forEach((item, index) => {
-          if (item.classList.contains("Dropdown-Options-Item_selected")) {
-           selectedIndex = index;
-           console.log(selectedIndex);
-          }
-        });
+      arrFromCollection.forEach((item, index) => {
+        if (item.classList.contains("Dropdown-Options-Item_selected")) {
+          selectedIndex = index;
+        }
+      });
+
+      if (e.keyCode === 40 && selectedIndex !== arrFromCollection.length - 1) {
+        innerElems[selectedIndex].classList.remove(
+          "Dropdown-Options-Item_selected"
+        );
+        innerElems[selectedIndex + 1].classList.add(
+          "Dropdown-Options-Item_selected"
+        );
       }
-     if (e.keyCode === 40 && selectedIndex !== arrFromCollection.length-1) {
-      innerElems[selectedIndex].classList.remove("Dropdown-Options-Item_selected");
-      innerElems[selectedIndex+1].classList.add("Dropdown-Options-Item_selected");
+
+      if (e.keyCode === 38 && selectedIndex !== 0) {
+        innerElems[selectedIndex].classList.remove(
+          "Dropdown-Options-Item_selected"
+        );
+        innerElems[selectedIndex - 1].classList.add(
+          "Dropdown-Options-Item_selected"
+        );
+      }
+
+      if (e.keyCode === 13) {
+        this.setState({ textSelect: innerElems[selectedIndex].textContent });
+      }
+
+     if (e.keyCode === 27) {
+      this.setState(() => {
+       return { display: "hide" };
+      });
+      document.getElementById("selectTab").focus();
      }
-     if (e.keyCode === 38 && selectedIndex !== 0) {
-      innerElems[selectedIndex].classList.remove("Dropdown-Options-Item_selected");
-      innerElems[selectedIndex-1].classList.add("Dropdown-Options-Item_selected");
-     }
+
+     const NAVIGATION = [38, 40];
+
+     document.body.addEventListener("keydown", (e) => {
+       if(-1 !== NAVIGATION.indexOf(e.keyCode)){
+         e.preventDefault();
+       }
+     });
+
     };
   }
 
@@ -109,6 +133,7 @@ export default class Dropdown extends Component {
       >
         <div className="Dropdown-SelectImage">{selectIcon}</div>
         <div
+         id="selectTab"
           className={`Dropdown-Select ${classSelectValue}`}
           tabIndex="0"
           onKeyDown={this.keyEnterHandler}
