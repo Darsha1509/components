@@ -69,6 +69,6 @@
   cursor: pointer;
 }
 
-.Dropdown-Options-Item:hover {
+.Dropdown-Options-Item_selected {
     font-weight: bold;
 }
