@@ -63,6 +63,7 @@ describe("<Dropdown />", function() {
     expect(wrapper.find(".Dropdown-Select_withIcon")).toBeTruthy();
   });
 
+
   it("change item style by pressing key down", function() {
     const wrapper = mount (<Dropdown data={["BMW", "LangeRover", "Mustang"]} />);
 
@@ -71,5 +72,42 @@ describe("<Dropdown />", function() {
     expect(wrapper.find(".Dropdown-Options-Item_selected").text()).toBe("BMW");
     wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 40});
     expect(wrapper.find(".Dropdown-Options-Item_selected").text()).toBe("LangeRover");
+  });
+
+
+  it("change item style by pressing key up", function() {
+    const wrapper = mount (<Dropdown data={["BMW", "LangeRover", "Mustang"]}/>);
+
+    wrapper.find("div.Dropdown-Select").simulate('click');
+    wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 40});
+    wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 40});
+    wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 38});
+    expect(wrapper.find(".Dropdown-Options-Item_selected").text()).toBe("LangeRover");
+  });
+
+  it('choose item by click', function(){
+    const wrapper = mount (<Dropdown data={["BMW", "LangeRover", "Mustang"]}/>);
+
+    wrapper.find("div.Dropdown-Select").simulate('click');
+    wrapper.find('#id_2').simulate('click');
+    expect(wrapper.find("div.Dropdown-Select").text()).toBe("Mustang");
+  });
+
+  it('choose item by press Enter key', function(){
+    const wrapper = mount (<Dropdown data={["BMW", "LangeRover", "Mustang"]}/>);
+
+    wrapper.find("div.Dropdown-Select").simulate('click');
+    wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 40});
+    wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 13});
+    expect(wrapper.find("div.Dropdown-Select").text()).toBe("LangeRover");
+  });
+
+  it('close itemsTab by press Esc key', function(){
+    const wrapper = mount (<Dropdown data={["BMW", "LangeRover", "Mustang"]}/>);
+
+    wrapper.find("div.Dropdown-Select").simulate('click');
+    expect(wrapper.find(".Dropdown-Options_show")).toHaveLength(1);
+    wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 27});
+    expect(wrapper.find(".Dropdown-Options_hide")).toBeTruthy();
   });
 });
