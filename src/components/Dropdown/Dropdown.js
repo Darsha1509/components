@@ -42,7 +42,7 @@ export default class Dropdown extends Component {
       e.stopPropagation();
       this.setState({
         textSelect: e.target.textContent,
-        selectedItem: e.target.id
+        selectedItem: e.target.id.substring(3)
       });
     };
 
@@ -103,7 +103,7 @@ export default class Dropdown extends Component {
                 ? "Dropdown-Options-Item_selected"
                 : ""
             }`}
-            id={index}
+            id={`id_${index}`}
             key={`key_${index}`}
             onClick={this.selectItemHandler}
             ref={this[`item_${index}`]}
@@ -130,7 +130,6 @@ export default class Dropdown extends Component {
         </div>
         <div className="Dropdown-Icon">{icon}</div>
         <ul
-          id="listOfItems"
           className={`Dropdown Dropdown-Options Dropdown_shadow Dropdown-Options_${display}`}
           tabIndex="0"
           onKeyDown={this.keyArrowHandler}
