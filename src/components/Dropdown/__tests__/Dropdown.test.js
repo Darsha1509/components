@@ -64,11 +64,12 @@ describe("<Dropdown />", function() {
   });
 
   it("change item style by pressing key down", function() {
-    const wrapper = mount (<Dropdown data={[1, 2, 3]} />);
+    const wrapper = mount (<Dropdown data={["BMW", "LangeRover", "Mustang"]} />);
 
-    wrapper.find("div.Dropdown.Dropdown_shadow").simulate('click');
+    wrapper.find("div.Dropdown-Select").simulate('click');
     expect(wrapper.find(".Dropdown-Options_show")).toHaveLength(1);
+    expect(wrapper.find(".Dropdown-Options-Item_selected").text()).toBe("BMW");
     wrapper.find(".Dropdown-Options_show").simulate('keyDown', {keyCode: 40});
-    expect(wrapper.find(".Dropdown-Options-Item_selected").text()).toBe("2");
+    expect(wrapper.find(".Dropdown-Options-Item_selected").text()).toBe("LangeRover");
   });
 });

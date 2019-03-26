@@ -9,8 +9,15 @@ export default class Dropdown extends Component {
 
     this.state = {
       display: "hide",
-      textSelect: "Selected"
+      textSelect: "Selected",
+      selectedItem: 0
     };
+
+    this.item_0 = React.createRef();
+    this.item_1 = React.createRef();
+    this.item_2 = React.createRef();
+
+    this.selectInput = React.createRef();
 
     this.showOptionsHandler = () => {
       this.setState(({ display }) => {
@@ -32,55 +39,37 @@ export default class Dropdown extends Component {
     };
 
     this.selectItemHandler = e => {
-      console.log(1234);
-      this.setState({ textSelect: e.target.textContent });
-      const variants = document.getElementById("listOfItems");
-      const toChangeElem = variants.getElementsByClassName(
-        "Dropdown-Options-Item_selected"
-      );
-      toChangeElem[0].classList.remove("Dropdown-Options-Item_selected");
-      e.target.classList.add("Dropdown-Options-Item_selected");
+      e.stopPropagation();
+      this.setState({
+        textSelect: e.target.textContent,
+        selectedItem: e.target.id
+      });
     };
 
     this.keyArrowHandler = e => {
-      // const variants = document.getElementById("listOfItems");
-      const innerElems = this._inputUl.getElementsByClassName("Dropdown-Select");
-      let selectedIndex = 0;
-      const arrFromCollection = Array.from(innerElems);
+      const innerElems = [
+        this.item_0.current,
+        this.item_1.current,
+        this.item_2.current
+      ];
 
-      arrFromCollection.forEach((item, index) => {
-        if (item.classList.contains("Dropdown-Options-Item_selected")) {
-          selectedIndex = index;
-        }
-      });
-
-      if (e.keyCode === 40 && selectedIndex !== arrFromCollection.length - 1) {
-        innerElems[selectedIndex].classList.remove(
-          "Dropdown-Options-Item_selected"
-        );
-        innerElems[selectedIndex + 1].classList.add(
-          "Dropdown-Options-Item_selected"
-        );
+      if (e.keyCode === 40 && this.state.selectedItem !== 2) {
+        this.setState({ selectedItem: this.state.selectedItem + 1 });
       }
 
-      if (e.keyCode === 38 && selectedIndex !== 0) {
-        innerElems[selectedIndex].classList.remove(
-          "Dropdown-Options-Item_selected"
-        );
-        innerElems[selectedIndex - 1].classList.add(
-          "Dropdown-Options-Item_selected"
-        );
+      if (e.keyCode === 38 && this.state.selectedItem !== 0) {
+        this.setState({ selectedItem: this.state.selectedItem - 1 });
       }
 
       if (e.keyCode === 13) {
-        this.setState({ textSelect: innerElems[selectedIndex].textContent });
+        this.setState({ textSelect: innerElems[this.state.selectedItem].textContent });
       }
 
       if (e.keyCode === 27) {
         this.setState(() => {
           return { display: "hide" };
         });
-        document.getElementById("selectTab").focus();
+        this.selectInput.current.focus();
       }
 
       const NAVIGATION = [38, 40];
@@ -107,18 +96,17 @@ export default class Dropdown extends Component {
 
     if (data) {
       optionsList = data.map((item, index) => {
-        let classNameValue = "Dropdown-Select Dropdown-Options-Item";
-        if (index === 0) {
-          classNameValue =
-            "Dropdown-Select Dropdown-Options-Item Dropdown-Options-Item_selected";
-        }
         return (
           <li
-            id={`id_${index}`}
-            className={classNameValue}
+            className={`Dropdown-Select Dropdown-Options-Item ${
+              +this.state.selectedItem === index
+                ? "Dropdown-Options-Item_selected"
+                : ""
+            }`}
+            id={index}
             key={`key_${index}`}
             onClick={this.selectItemHandler}
-            ref={(node) => {this._inputLi = node}}
+            ref={this[`item_${index}`]}
           >
             {item}
           </li>
@@ -133,10 +121,10 @@ export default class Dropdown extends Component {
       >
         <div className="Dropdown-SelectImage">{selectIcon}</div>
         <div
-          id="selectTab"
           className={`Dropdown-Select ${classSelectValue}`}
           tabIndex="0"
           onKeyDown={this.keyEnterHandler}
+          ref={this.selectInput}
         >
           {textSelect}
         </div>
@@ -146,9 +134,6 @@ export default class Dropdown extends Component {
           className={`Dropdown Dropdown-Options Dropdown_shadow Dropdown-Options_${display}`}
           tabIndex="0"
           onKeyDown={this.keyArrowHandler}
-          ref={node => {
-            this._inputUl = node;
-          }}
         >
           {optionsList}
         </ul>
